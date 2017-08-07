@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<title>My AngularJS App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+		<script src="js/myapp.js"></script>
+		<script src="js/conditionChecker.js"></script>
+	</head>
+	<body ng-app="myApp" ng-controller="myCtrl">
+		{{test}}
+		<div ng-repeat="question in questions" ng-hide="question.condition && !conditionIsMet(question.condition)">
+			<h3>{{question.text}} <span style="color:red;">{{question.condition}}</span></h3>
+			<div ng-if="question.type == 'multichoice'" ng-repeat="answer in question.answers">
+				<input type="checkbox" ng-model="answer.checked"></input>{{answer.text}}
+			</div>
+			<div ng-if="question.type == 'number'">
+				<input type="number" ng-model="question.answer"></input>
+			</div>
+			<div ng-if="question.type == 'text'">
+				<input type="text" ng-model="question.answer"></input>
+			</div>
+			<div ng-if="question.type == 'radio'" ng-repeat="answer in question.answers">
+				<input type="radio" ng-model="question.answer" ng-value="answer"></input>{{answer.text}}
+			</div>
+		</div>
+		<br/>
+		<br/>
+		<br/>
+		<h3>Questions object</h3>
+		<code>{{questions}}</code>
+	</body>
+</html>
